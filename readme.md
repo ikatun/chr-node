@@ -40,10 +40,6 @@ Just a regular node script which uses fetch (runme.js)
 })();
 ```
 
-## NOTE
-Command process.exit() is needed to end the program.
-Otherwise, it just keeps running indefinitely.
-
 Rather than using node, you can now run it via chrome:
 ```
 chr-node runme.js
@@ -54,3 +50,7 @@ WebRTC is not properly supported by NodeJS.
 This tool allows for server side tools to easily use WebRTC.
 
 Also, why not?
+
+## IMPORTANT NOTE
+Call `process.exit()` is needed to end the program.
+Otherwise, it just keeps running indefinitely.

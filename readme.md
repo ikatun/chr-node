@@ -40,6 +40,10 @@ Just a regular node script which uses fetch (runme.js)
 })();
 ```
 
+## NOTE
+Command process.exit() is needed to end the program.
+Otherwise, it just keeps running indefinitely.
+
 Rather than using node, you can now run it via chrome:
 ```
 chromenode runme.js

@@ -1,4 +1,4 @@
-# chrome-node
+# chromenode
 
 Run your NodeJS scripts in Chrome with ease!
 
@@ -7,29 +7,29 @@ Run your NodeJS scripts in Chrome with ease!
 To install the CLI, simply run:
 
 ```
-npm install -g chrome-node
+npm install -g chromenode
 ```
 
 ## Usage
 
-To use chrome-node, just call it with .ts file you want to run. You'll need a tsconfig file for that.
+To use chromenode, just call it with .ts file you want to run. You'll need a tsconfig file for that.
 ```
-chrome-node runme.ts
+chromenode runme.ts
 ```
 
 You can also run .js files 
 ```
-chrome-node runme.js
+chromenode runme.js
 ```
 
 ## puppeteer.json
-If `puppeteer.json` exists in the directory from which `chrome-node` is called,
+If `puppeteer.json` exists in the directory from which `chromenode` is called,
 it's then sent to the puppeteer library internally.
 Useful for switching browser or adding flags to it.
 
 ## Example
 
-Here's an example of using chrome-node to run a simple script that logs "Hello, World!" to the console:
+Here's an example of using chromenode to run a simple script that logs "Hello, World!" to the console:
 
 Just a regular node script which uses fetch (runme.js)
 ```
@@ -42,7 +42,7 @@ Just a regular node script which uses fetch (runme.js)
 
 Rather than using node, you can now run it via chrome:
 ```
-chrome-node runme.js
+chromenode runme.js
 ```
 
 ## Why?

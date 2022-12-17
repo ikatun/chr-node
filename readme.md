@@ -29,7 +29,7 @@ Useful for switching browser or adding flags to it.
 
 ## Example
 
-Here's an example of using chromenode to run a simple script that logs "Hello, World!" to the console:
+Here's an example of using chromenode to run a simple script that `fetch()`es my github profile info:
 
 Just a regular node script which uses fetch (runme.js)
 ```

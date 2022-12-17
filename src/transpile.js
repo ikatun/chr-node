@@ -2,8 +2,8 @@ const webpack = require('webpack');
 
 module.exports.transpile = function transpile(src, destDirectory, destFilename) {
   const config = {
-    mode: "development",
-    devtool: "inline-source-map",
+    mode: 'development',
+    devtool: 'inline-source-map',
     entry: {
       main: `./${src}`,
     },
@@ -12,16 +12,16 @@ module.exports.transpile = function transpile(src, destDirectory, destFilename) 
       filename: destFilename,
     },
     resolve: {
-      extensions: [".ts", ".tsx", ".js"],
+      extensions: ['.ts', '.tsx', '.js'],
     },
     module: {
       rules: [
         {
           test: /\.tsx?$/,
-          loader: `${__dirname}/../node_modules/ts-loader`
-        }
-      ]
-    }
+          loader: `${__dirname}/../node_modules/ts-loader`,
+        },
+      ],
+    },
   };
 
   return new Promise((resolve, reject) => {
@@ -46,5 +46,5 @@ module.exports.transpile = function transpile(src, destDirectory, destFilename) 
       }
       resolve();
     });
-  })
-}
+  });
+};

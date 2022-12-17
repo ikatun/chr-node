@@ -16,7 +16,7 @@ function getDefaultExecutablePath() {
     'C:\\Program Files\\Google\\Chrome\\Application',
   ];
 
-  return windowsPaths.find(p => fs.existsSync(p))
+  return windowsPaths.find((p) => fs.existsSync(p));
 }
 
 function serializeConsoleMessage(message) {
@@ -24,7 +24,7 @@ function serializeConsoleMessage(message) {
   if (!args.length) {
     return [message.text()];
   }
-  return Promise.all(args.map(m => m.jsonValue().catch(e => e)));
+  return Promise.all(args.map((m) => m.jsonValue().catch((e) => e)));
 }
 
 module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
@@ -34,14 +34,13 @@ module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
   });
 
   const page = (await browser.pages())[0];
-  page.on('console', async message => {
+  page.on('console', async (message) => {
     const args = await serializeConsoleMessage(message);
     if (args.length === 0) {
       return;
     }
 
-
-    switch(message.type()) {
+    switch (message.type()) {
       case 'log':
         console.log(...args);
         break;
@@ -54,7 +53,7 @@ module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
     }
   });
 
-  page.on('error', error => {
+  page.on('error', (error) => {
     if (!error) {
       return;
     }
@@ -62,7 +61,7 @@ module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
     console.error(error);
   });
 
-  page.on('pageerror', error => {
+  page.on('pageerror', (error) => {
     if (!error) {
       return;
     }
@@ -84,8 +83,8 @@ module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
       if (window.terminated) {
         window.process.exit();
       }
-    })
-  })
+    });
+  });
 
   return { page, browser, exitPromise };
-}
+};

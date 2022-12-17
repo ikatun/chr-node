@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 
 module.exports.createServer = function createServer(publicDir, publicPath, jsFileName) {
   const app = express();
@@ -16,7 +16,7 @@ module.exports.createServer = function createServer(publicDir, publicPath, jsFil
       </head>
       <body></body>
       </html>
-    `)
+    `);
   });
 
   return new Promise((resolve) => {
@@ -25,5 +25,5 @@ module.exports.createServer = function createServer(publicDir, publicPath, jsFil
       const close = () => listener.close();
       resolve({ port, close });
     });
-  })
-}
+  });
+};

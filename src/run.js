@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-const os = require("os");
+const os = require('os');
 const path = require('path');
 
-const {transpile} = require("./transpile");
-const {createServer} = require("./create-server");
-const {launchBrowser} = require("./launch-browser");
+const { transpile } = require('./transpile');
+const { createServer } = require('./create-server');
+const { launchBrowser } = require('./launch-browser');
 const fs = require('fs');
-const [node, script, src] = process.argv;
+const [, , src] = process.argv;
 
 if (!src) {
   console.error('node-chrome <src>');

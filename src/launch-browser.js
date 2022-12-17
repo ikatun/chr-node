@@ -1,6 +1,23 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const fs = require('fs');
 
-const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+function getDefaultExecutablePath() {
+  if (process.platform === 'darwin') {
+    return '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  }
+
+  if (process.platform === 'linux') {
+    return 'google-chrome';
+  }
+
+  const windowsPaths = [
+    'C:\\Program Files (x86)\\Google\\Application',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application',
+    'C:\\Program Files\\Google\\Chrome\\Application',
+  ];
+
+  return windowsPaths.find(p => fs.existsSync(p))
+}
 
 function serializeConsoleMessage(message) {
   const args = message.args();
@@ -10,10 +27,10 @@ function serializeConsoleMessage(message) {
   return Promise.all(args.map(m => m.jsonValue().catch(e => e)));
 }
 
-module.exports.launchBrowser = async function launchBrowser(url) {
+module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
   const browser = await puppeteer.launch({
-    executablePath,
-    headless: true,
+    executablePath: getDefaultExecutablePath(),
+    ...opts,
   });
 
   const page = (await browser.pages())[0];

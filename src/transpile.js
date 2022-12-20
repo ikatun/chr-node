@@ -1,7 +1,13 @@
 const webpack = require('webpack');
+const NodeSourcePlugin = require('webpack-import-plugins').importWebpack4Plugins().node.NodeSourcePlugin;
+
+console.log('NodeSourcePlugin', NodeSourcePlugin);
 
 module.exports.transpile = function transpile(src, destDirectory, destFilename) {
   const config = {
+    // plugins: [
+    //   new NodeSourcePlugin('current')
+    // ],
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
@@ -22,6 +28,12 @@ module.exports.transpile = function transpile(src, destDirectory, destFilename) 
         },
       ],
     },
+    node: {
+      dns: 'mock',
+      fs: 'empty',
+      path: true,
+      url: false
+    }
   };
 
   return new Promise((resolve, reject) => {

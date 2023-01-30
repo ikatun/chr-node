@@ -57,7 +57,6 @@ module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
     if (!error) {
       return;
     }
-    console.error('error');
     console.error(error);
   });
 
@@ -65,7 +64,7 @@ module.exports.launchBrowser = async function launchBrowser(url, opts = {}) {
     if (!error) {
       return;
     }
-    console.error('pageerror');
+    console.log('pageerror', error);
     console.error(error);
   });
 

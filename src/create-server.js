@@ -11,8 +11,8 @@ module.exports.createServer = function createServer(publicDir, publicPath, jsFil
       <html>
       <head>
         <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
-        <script type="text/javascript">window.process = ({ exit(){ window.terminated = true; } })</script>
-        <script type="text/javascript" src="${publicDir}/${jsFileName}"></script>
+        <script type="text/javascript">window.process = ({ exit(){ window.terminated = true; }})</script>
+        <script type="text/javascript" src="${publicDir}/${jsFileName}" defer="defer"></script>
       </head>
       <body></body>
       </html>

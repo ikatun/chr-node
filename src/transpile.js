@@ -1,62 +1,21 @@
-const webpack = require('webpack');
-const NodeSourcePlugin = require('webpack-import-plugins').importWebpack4Plugins().node.NodeSourcePlugin;
+const  { build } = require("esbuild");
+const { polyfillNode } = require("esbuild-plugin-polyfill-node");
+const alias = require('esbuild-plugin-alias');
+const path = require('path');
 
-console.log('NodeSourcePlugin', NodeSourcePlugin);
-
-module.exports.transpile = function transpile(src, destDirectory, destFilename) {
-  const config = {
-    // plugins: [
-    //   new NodeSourcePlugin('current')
-    // ],
-    mode: 'development',
-    devtool: 'inline-source-map',
-    entry: {
-      main: `./${src}`,
+module.exports.transpile = async function transpile(src, destDirectory, destFilename) {
+  await build({
+    inject: [path.join(__dirname, 'process-shim.js')],
+    define: {
+      'process.argv': JSON.stringify(process.argv),
+      'process.env': JSON.stringify(process.env),
     },
-    output: {
-      path: destDirectory,
-      filename: destFilename,
-    },
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js'],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          loader: `${__dirname}/../node_modules/ts-loader`,
-        },
-      ],
-    },
-    node: {
-      dns: 'mock',
-      fs: 'empty',
-      path: true,
-      url: false
-    }
-  };
-
-  return new Promise((resolve, reject) => {
-    webpack(config, (err, stats) => {
-      if (err) {
-        console.error(err.stack || err);
-        if (err.details) {
-          console.error(err.details);
-        }
-        reject(err);
-        return;
-      }
-
-      const info = stats.toJson();
-
-      if (stats.hasErrors()) {
-        console.error(info.errors);
-      }
-
-      if (stats.hasWarnings()) {
-        console.warn(info.warnings);
-      }
-      resolve();
-    });
+    entryPoints: [src],
+    bundle: true,
+    outfile: path.join(destDirectory, destFilename),
+    target: 'chrome109',
+    plugins: [
+      polyfillNode({ globals: { process: true }, polyfills: { net: 'empty', inherits: false, stream: true, crypto: true } }),
+    ],
   });
-};
+}

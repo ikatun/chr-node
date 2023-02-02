@@ -1,6 +1,6 @@
 {
   "name": "chr-node",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Run NodeJS scripts in Chrome via puppeteer",
   "main": "index.js",
   "scripts": {

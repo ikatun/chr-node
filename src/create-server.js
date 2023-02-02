@@ -6,6 +6,9 @@ module.exports.createServer = function createServer(publicDir, publicPath, jsFil
   app.use(`/${publicDir}`, express.static(`${publicPath}/${publicDir}`));
 
   app.get('/', (req, res) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
     res.send(`
       <!DOCTYPE html>
       <html>

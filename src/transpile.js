@@ -1,5 +1,5 @@
-const  { build } = require("esbuild");
-const { polyfillNode } = require("esbuild-plugin-polyfill-node");
+const { build } = require('esbuild');
+const { polyfillNode } = require('esbuild-plugin-polyfill-node');
 const alias = require('esbuild-plugin-alias');
 const path = require('path');
 
@@ -15,7 +15,10 @@ module.exports.transpile = async function transpile(src, destDirectory, destFile
     outfile: path.join(destDirectory, destFilename),
     target: 'chrome109',
     plugins: [
-      polyfillNode({ globals: { process: true }, polyfills: { net: 'empty', inherits: false, stream: true, crypto: true } }),
+      polyfillNode({
+        globals: { process: true },
+        polyfills: { net: 'empty', inherits: false, stream: true, crypto: true },
+      }),
     ],
   });
-}
+};
